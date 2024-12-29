@@ -37,8 +37,11 @@ func main() {
 	// Render all students
 	r.HandleFunc("/students", HandleGetAllStudents)
 
+	// Handle the form submission
+	r.HandleFunc("POST /add-grade", HandleAddGrades)
+
 	//render the form to add a new grade
-	r.HandleFunc("POST /add-grade-form", HandleAddGrade)
+	r.HandleFunc("GET /add-grade-form", HandleAddGradesForm)
 
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:8080")

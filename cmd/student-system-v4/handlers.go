@@ -62,6 +62,29 @@ func HandleGetAllStudents(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, students)
 }
 
-func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
+func HandleAddGrades(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/add_grade.html"))
+	tmpl.Execute(w, nil)
+}
 
+func HandleAddGradesForm(w http.ResponseWriter, r *http.Request) {
+	lessonName := r.FormValue("lessonName")
+	score, err := strconv.Atoi(r.FormValue("score"))
+	if err != nil {
+		http.Error(w, "Invalid Score", http.StatusBadRequest)
+	}
+	studentId, err := strconv.Atoi(r.FormValue("studentId"))
+	if err != nil {
+		http.Error(w, "Invalid StudentId", http.StatusBadRequest)
+	}
+
+	newGrade := Grade{
+		ID:         len(grades) + 1,
+		LessonName: lessonName,
+		Score:      float64(score),
+		StudentID:  studentId,
+	}
+	grades = append(grades, newGrade)
+
+	http.Redirect(w, r, "/students", http.StatusSeeOther)
 }
