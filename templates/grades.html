@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Grades</title>
+  </head>
+  <body>
+    <h1>Student Grades</h1>
+    <table border="1">
+      <tr>
+        <th>Student Name</th>
+        <th>Age</th>
+        <th>Lesson</th>
+        <th>Score</th>
+      </tr>
+      {{range .}}
+      <tr>
+        <td>{{.StudentName}}</td>
+        <td>{{.StudentAge}}</td>
+        <td>{{.LessonName}}</td>
+        <td>{{.Score}}</td>
+      </tr>
+      {{end}}
+    </table>
+  </body>
+</html>
