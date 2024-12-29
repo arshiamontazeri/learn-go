@@ -36,7 +36,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	// --------------------------------------------------------------------------------------------
 	// student
 	StudentBytes, err := os.ReadFile("./cmd/student-system-v3/students.json")
 	if err != nil {
@@ -58,7 +58,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	// -------------------------------------------------------------------------------------------
 	r := http.NewServeMux()
 
 	r.HandleFunc("GET /grades", HandleGetAllGrades)

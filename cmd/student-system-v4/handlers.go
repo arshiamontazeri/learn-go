@@ -6,6 +6,7 @@ import (
 	"strconv"
 )
 
+// --------------------------------------------------------------------------------------------
 func HandleGetAllGrades(w http.ResponseWriter, r *http.Request) {
 
 	var studentGradeViews []StudentGradeView
@@ -26,11 +27,13 @@ func HandleGetAllGrades(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, studentGradeViews)
 }
 
+// --------------------------------------------------------------------------------------------
 func HandleAddStudentForm(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/add_student.html"))
 	tmpl.Execute(w, nil)
 }
 
+// --------------------------------------------------------------------------------------------
 func HandleAddStudent(w http.ResponseWriter, r *http.Request) {
 
 	name := r.FormValue("name")
@@ -57,16 +60,19 @@ func HandleAddStudent(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/grades", http.StatusSeeOther)
 }
 
+// --------------------------------------------------------------------------------------------
 func HandleGetAllStudents(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/students.html"))
 	tmpl.Execute(w, students)
 }
 
+// --------------------------------------------------------------------------------------------
 func HandleAddGrades(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/add_grade.html"))
 	tmpl.Execute(w, nil)
 }
 
+// --------------------------------------------------------------------------------------------
 func HandleAddGradesForm(w http.ResponseWriter, r *http.Request) {
 	lessonName := r.FormValue("lessonName")
 	score, err := strconv.Atoi(r.FormValue("score"))
