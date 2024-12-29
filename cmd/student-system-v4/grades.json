@@ -1,0 +1,20 @@
+[
+	{
+		"ID": 1,
+		"StudentID": 1,
+		"LessonName": "Math",
+		"Score": 95.5
+	},
+	{
+		"ID": 2,
+		"StudentID": 1,
+		"LessonName": "Science",
+		"Score": 88.0
+	},
+	{
+		"ID": 3,
+		"StudentID": 2,
+		"LessonName": "Math",
+		"Score": 78.0
+	}
+]

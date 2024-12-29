@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 )
 
 var (
@@ -12,16 +14,49 @@ var (
 
 func main() {
 
-	// Sample data
-	students = []Student{
-		{ID: 1, Name: "Alice", Age: 20},
-		{ID: 2, Name: "Bob", Age: 22},
+	// grade
+	GradeBytes, err := os.ReadFile("./cmd/student-system-v3/grades.json")
+	if err != nil {
+		panic(err)
 	}
 
-	grades = []Grade{
-		{ID: 1, StudentID: 1, LessonName: "Math", Score: 95.5},
-		{ID: 2, StudentID: 1, LessonName: "Science", Score: 88.0},
-		{ID: 3, StudentID: 2, LessonName: "Math", Score: 78.0},
+	grades := []Grade{}
+
+	err = json.Unmarshal(GradeBytes, &grades)
+	if err != nil {
+		panic(err)
+	}
+
+	GradeBytes, err = json.Marshal(grades)
+	if err != nil {
+		panic(err)
+	}
+
+	err = os.WriteFile("./cmd/student-system-v3/grades.json", GradeBytes, 0644)
+	if err != nil {
+		panic(err)
+	}
+
+	// student
+	StudentBytes, err := os.ReadFile("./cmd/student-system-v3/students.json")
+	if err != nil {
+		panic(err)
+	}
+	students := []Student{}
+
+	err = json.Unmarshal(StudentBytes, &students)
+	if err != nil {
+		panic(err)
+	}
+
+	StudentBytes, err = json.Marshal(students)
+	if err != nil {
+		panic(err)
+	}
+
+	err = os.WriteFile("./cmd/student-system-v3/students.json", StudentBytes, 0644)
+	if err != nil {
+		panic(err)
 	}
 
 	r := http.NewServeMux()
