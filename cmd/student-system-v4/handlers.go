@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -93,4 +94,27 @@ func HandleAddGradesForm(w http.ResponseWriter, r *http.Request) {
 	grades = append(grades, newGrade)
 
 	http.Redirect(w, r, "/students", http.StatusSeeOther)
+}
+
+// --------------------------------------------------------------------------------------------
+func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
+	studentId, err := strconv.Atoi(r.FormValue("studenId"))
+	if err != nil {
+		http.Error(w, "Invalid student average score", http.StatusBadRequest)
+	}
+
+	var studentGrades []Grade
+	for _, grade := range grades {
+		if grade.StudentID == studentId {
+			studentGrades = append(studentGrades, grade)
+		}
+	}
+	if len(studentGrades) == 0 {
+		fmt.Println("No grades available for this student.")
+	}
+	// average
+	totalScore := 0.0
+	for _, grade := range studentGrades {
+		totalScore += float64(grade.Score)
+	}
 }
