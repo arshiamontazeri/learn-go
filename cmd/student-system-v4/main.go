@@ -37,6 +37,9 @@ func main() {
 	// Render all students
 	r.HandleFunc("/students", HandleGetAllStudents)
 
+	//render the form to add a new grade
+	r.HandleFunc("POST /add-grade-form", HandleAddGrade)
+
 	// Start the server
 	log.Println(http.ListenAndServe(":8080", r))
 }

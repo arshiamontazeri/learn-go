@@ -61,3 +61,7 @@ func HandleGetAllStudents(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/students.html"))
 	tmpl.Execute(w, students)
 }
+
+func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
+
+}
