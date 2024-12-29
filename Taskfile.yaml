@@ -3,9 +3,10 @@ version: "3"
 dotenv: [".env"]
 
 tasks:
-  greet:
+  v4:
     cmds:
-      - echo $name
+      - go run ./cmd/student-system-v4/.
+
   # c-*:
   #   vars:
   #     ARG_1: "{{index .MATCH 0}}"
