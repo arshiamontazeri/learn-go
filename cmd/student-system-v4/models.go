@@ -19,8 +19,3 @@ type StudentGradeView struct {
 	LessonName  string
 	Score       float64
 }
-
-var (
-	students []Student
-	grades   []Grade
-)
