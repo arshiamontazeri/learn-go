@@ -5,10 +5,9 @@ dotenv: [".env"]
 tasks:
   v4:
     cmds:
-      - go run ./cmd/student-system-v4/.
+      - task: build-v4
+      - ./bin/main
 
-  # c-*:
-  #   vars:
-  #     ARG_1: "{{index .MATCH 0}}"
-  #   cmds:
-  #     - echo {{.ARG_1}}
+  build-v4:
+    cmds:
+      - go build -o ./bin/main.exe ./cmd/student-system-v4/.
