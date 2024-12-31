@@ -2,22 +2,18 @@
 <html>
   <body>
     <h2>Average score</h2>
-
-    <form action="/Student-average-score" method="get">
-      <label for="fname">Student Id:</label><br />
-      <input type="text" id="fname" name="fname" value="John" /><br />
-
-      <button type="submit">Student average score</button>
-    </form>
-    <table>
-      {{range .}}
+    <h2>{{.StudentName}}</h2>
+    <h2>{{.Average}}</h2>
+        <table border="1">
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <th>Lesson Name</th>
+        <th>Score</th>
+      </tr>
+      {{range .Grades}}
+      <tr>
+        <td>{{.LessonName}}</td>
+        <td>{{.Score}}</td>
       </tr>
       {{end}}
-    </table>
   </body>
 </html>

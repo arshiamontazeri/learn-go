@@ -76,7 +76,7 @@ func main() {
 	r.HandleFunc("GET /add-grade-form", HandleAddGradesForm)
 
 	//Form for student's overall grade point average
-	r.HandleFunc("GET /Student-average-score", HandleSeeStudentAverageScore)
+	r.HandleFunc("GET /students/{id}/average", HandleSeeStudentAverageScore)
 
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:8080")

@@ -19,3 +19,9 @@ type StudentGradeView struct {
 	LessonName  string
 	Score       float64
 }
+
+type StudentAverageView struct {
+	StudentName string
+	Average     float64
+	Grades      []Grade
+}

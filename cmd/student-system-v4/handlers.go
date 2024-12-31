@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -98,23 +97,41 @@ func HandleAddGradesForm(w http.ResponseWriter, r *http.Request) {
 
 // --------------------------------------------------------------------------------------------
 func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
-	studentId, err := strconv.Atoi(r.FormValue("studenId"))
-	if err != nil {
-		http.Error(w, "Invalid student average score", http.StatusBadRequest)
-	}
 
-	var studentGrades []Grade
-	for _, grade := range grades {
-		if grade.StudentID == studentId {
-			studentGrades = append(studentGrades, grade)
+	id, _ := strconv.Atoi(r.PathValue("id"))
+
+	res := StudentAverageView{}
+
+	for _, student := range students {
+
+		if student.ID == id {
+			res.StudentName = student.Name
 		}
 	}
-	if len(studentGrades) == 0 {
-		fmt.Println("No grades available for this student.")
+
+	// var studentGrades []Grade
+	for _, grade := range grades {
+		if grade.StudentID == id {
+			res.Grades = append(res.Grades, grade)
+		}
 	}
-	// average
+
+	// // average
 	totalScore := 0.0
-	for _, grade := range studentGrades {
+	count := 0
+	for _, grade := range res.Grades {
 		totalScore += float64(grade.Score)
+		count++
 	}
+
+	if count == 0 {
+		totalScore = 0
+	} else {
+		totalScore = totalScore / float64(count)
+	}
+
+	res.Average = totalScore
+
+	tmpl := template.Must(template.ParseFiles("templates/average_score.html"))
+	tmpl.Execute(w, res)
 }
