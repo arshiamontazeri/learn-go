@@ -78,6 +78,9 @@ func main() {
 	//render the form to add a new grade
 	r.HandleFunc("GET /add-grade-form", HandleAddGradesForm)
 
+	//
+	r.HandleFunc("GET /Student-average-score", HandleSeeStudentAverageScore)
+
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:8080")
 	log.Println(http.ListenAndServe(":8080", r))

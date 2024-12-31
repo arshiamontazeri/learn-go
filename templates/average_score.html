@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Text input fields</h2>
+
+    <form action="/Student-average-score" method="get">
+      <label for="fname">Student Id:</label><br />
+      <input type="text" id="fname" name="fname" value="John" /><br />
+
+      <button type="submit">Student average score</button>
+    </form>
+    <table>
+      {{range .}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {{end}}
+    </table>
+  </body>
+</html>
