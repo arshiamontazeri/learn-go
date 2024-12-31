@@ -38,7 +38,7 @@ func main() {
 	}
 	// --------------------------------------------------------------------------------------------
 	// student
-	StudentBytes, err := os.ReadFile("./cmd/student-system-v3/students.json")
+	StudentBytes, err := os.ReadFile("./cmd/student-system-v4/students.json")
 	if err != nil {
 		panic(err)
 	}
@@ -54,7 +54,7 @@ func main() {
 		panic(err)
 	}
 
-	err = os.WriteFile("./cmd/student-system-v3/students.json", StudentBytes, 0644)
+	err = os.WriteFile("./cmd/student-system-v4/students.json", StudentBytes, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +78,7 @@ func main() {
 	//render the form to add a new grade
 	r.HandleFunc("GET /add-grade-form", HandleAddGradesForm)
 
-	//
+	//Form for student's overall grade point average
 	r.HandleFunc("GET /Student-average-score", HandleSeeStudentAverageScore)
 
 	// Start the server
