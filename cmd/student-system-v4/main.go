@@ -15,7 +15,7 @@ var (
 func main() {
 
 	// grade
-	GradeBytes, err := os.ReadFile("./cmd/student-system-v3/grades.json")
+	GradeBytes, err := os.ReadFile("./cmd/student-system-v4/grades.json")
 	if err != nil {
 		panic(err)
 	}
@@ -32,7 +32,7 @@ func main() {
 		panic(err)
 	}
 
-	err = os.WriteFile("./cmd/student-system-v3/grades.json", GradeBytes, 0644)
+	err = os.WriteFile("./cmd/student-system-v4/grades.json", GradeBytes, 0644)
 	if err != nil {
 		panic(err)
 	}
