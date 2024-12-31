@@ -20,8 +20,6 @@ func main() {
 		panic(err)
 	}
 
-	grades := []Grade{}
-
 	err = json.Unmarshal(GradeBytes, &grades)
 	if err != nil {
 		panic(err)
@@ -42,7 +40,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	students := []Student{}
 
 	err = json.Unmarshal(StudentBytes, &students)
 	if err != nil {
