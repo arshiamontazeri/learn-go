@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 // --------------------------------------------------------------------------------------------
@@ -25,6 +27,12 @@ func HandleGetAllGrades(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("templates/grades.html"))
 	tmpl.Execute(w, studentGradeViews)
+}
+
+// --------------------------------------------------------------------------------------------
+func HandleGetAllStudents(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/students.html"))
+	tmpl.Execute(w, students)
 }
 
 // --------------------------------------------------------------------------------------------
@@ -61,27 +69,25 @@ func HandleAddStudent(w http.ResponseWriter, r *http.Request) {
 }
 
 // --------------------------------------------------------------------------------------------
-func HandleGetAllStudents(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("templates/students.html"))
-	tmpl.Execute(w, students)
-}
-
-// --------------------------------------------------------------------------------------------
-func HandleAddGrades(w http.ResponseWriter, r *http.Request) {
+func HandleAddGradeForm(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/add_grade.html"))
 	tmpl.Execute(w, nil)
 }
 
 // --------------------------------------------------------------------------------------------
-func HandleAddGradesForm(w http.ResponseWriter, r *http.Request) {
-	lessonName := r.FormValue("lessonName")
-	score, err := strconv.Atoi(r.FormValue("score"))
+func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
+	lessonName := r.FormValue("LessonName")
+	score, err := strconv.Atoi(r.FormValue("Score"))
 	if err != nil {
 		http.Error(w, "Invalid Score", http.StatusBadRequest)
+		return
 	}
-	studentId, err := strconv.Atoi(r.FormValue("studentId"))
+	studentId, err := strconv.Atoi(r.FormValue("StudentId"))
 	if err != nil {
 		http.Error(w, "Invalid StudentId", http.StatusBadRequest)
+		fmt.Print(studentId)
+		return
+
 	}
 
 	newGrade := Grade{
@@ -134,4 +140,41 @@ func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("templates/average_score.html"))
 	tmpl.Execute(w, res)
+}
+
+// -----------------------------------------------------------------------------
+func HandleSearch(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("Name")
+
+	ok := false
+	for _, student := range students {
+		if strings.Contains(student.Name, name) {
+			ok = true
+
+		}
+	}
+	var scanId int
+	fmt.Scan(&scanId)
+	s := 0
+	if ok {
+		s = scanId
+	}
+	for _, student := range students {
+		if student.ID == s {
+			for _, grade := range grades {
+				if student.ID == grade.StudentID {
+
+				}
+			}
+		}
+	}
+
+	if !ok {
+		fmt.Println("------------------------------------------------------------")
+		fmt.Println("\t<*****> No such name found <*****>")
+		return
+	}
+
+	tmpl := template.Must(template.ParseFiles("templates/search.html"))
+	tmpl.Execute(w)
 }
