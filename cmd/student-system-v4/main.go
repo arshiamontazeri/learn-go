@@ -70,10 +70,10 @@ func main() {
 	r.HandleFunc("/students", HandleGetAllStudents)
 
 	// Handle the form submission
-	r.HandleFunc("POST /add-grade", HandleAddGrades)
+	r.HandleFunc("POST /add-grade", HandleAddGradeForm)
 
 	//render the form to add a new grade
-	r.HandleFunc("GET /add-grade-form", HandleAddGradesForm)
+	r.HandleFunc("GET /add-grade-form", HandleAddGrade)
 
 	//Form for student's overall grade point average
 	r.HandleFunc("GET /students/{id}/average", HandleSeeStudentAverageScore)
