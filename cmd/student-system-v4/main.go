@@ -78,6 +78,9 @@ func main() {
 	//Form for student's overall grade point average
 	r.HandleFunc("GET /students/{id}/average", HandleSeeStudentAverageScore)
 
+	//Student search
+	r.HandleFunc("GET /search", HandleSearch)
+
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:8080")
 	log.Println(http.ListenAndServe(":8080", r))

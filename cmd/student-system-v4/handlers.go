@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 // --------------------------------------------------------------------------------------------
@@ -139,4 +140,41 @@ func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("templates/average_score.html"))
 	tmpl.Execute(w, res)
+}
+
+// -----------------------------------------------------------------------------
+func HandleSearch(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("Name")
+
+	ok := false
+	for _, student := range students {
+		if strings.Contains(student.Name, name) {
+			ok = true
+
+		}
+	}
+	var scanId int
+	fmt.Scan(&scanId)
+	s := 0
+	if ok {
+		s = scanId
+	}
+	for _, student := range students {
+		if student.ID == s {
+			for _, grade := range grades {
+				if student.ID == grade.StudentID {
+
+				}
+			}
+		}
+	}
+
+	if !ok {
+		fmt.Println("------------------------------------------------------------")
+		fmt.Println("\t<*****> No such name found <*****>")
+		return
+	}
+
+	tmpl := template.Must(template.ParseFiles("templates/search.html"))
+	tmpl.Execute(w)
 }
