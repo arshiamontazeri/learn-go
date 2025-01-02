@@ -85,7 +85,6 @@ func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
 	studentId, err := strconv.Atoi(r.FormValue("StudentId"))
 	if err != nil {
 		http.Error(w, "Invalid StudentId", http.StatusBadRequest)
-		fmt.Print(studentId)
 		return
 
 	}
@@ -153,11 +152,13 @@ func HandleSearch(w http.ResponseWriter, r *http.Request) {
 
 		}
 	}
-	var scanId int
-	fmt.Scan(&scanId)
+	studentId, err := strconv.Atoi(r.FormValue("studentId"))
+	if err != nil {
+		http.Error(w, "Invalid StudentId", http.StatusBadRequest)
+	}
 	s := 0
 	if ok {
-		s = scanId
+		s = studentId
 	}
 	for _, student := range students {
 		if student.ID == s {
@@ -170,8 +171,6 @@ func HandleSearch(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !ok {
-		fmt.Println("------------------------------------------------------------")
-		fmt.Println("\t<*****> No such name found <*****>")
 		return
 	}
 

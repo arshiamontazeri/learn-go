@@ -25,3 +25,8 @@ type StudentAverageView struct {
 	Average     float64
 	Grades      []Grade
 }
+
+type StudentSearch struct {
+	students []Student
+	grades   []Grade
+}
