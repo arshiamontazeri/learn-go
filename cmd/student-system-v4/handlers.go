@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -78,10 +79,14 @@ func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
 	score, err := strconv.Atoi(r.FormValue("Score"))
 	if err != nil {
 		http.Error(w, "Invalid Score", http.StatusBadRequest)
+		return
 	}
 	studentId, err := strconv.Atoi(r.FormValue("StudentId"))
 	if err != nil {
 		http.Error(w, "Invalid StudentId", http.StatusBadRequest)
+		fmt.Print(studentId)
+		return
+
 	}
 
 	newGrade := Grade{
