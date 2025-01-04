@@ -79,7 +79,7 @@ func main() {
 	r.HandleFunc("GET /students/{id}/average", HandleSeeStudentAverageScore)
 
 	//Student search
-	r.HandleFunc("POST /search", HandleSearch)
+	r.HandleFunc("GET /search", HandleSearch)
 	r.HandleFunc("GET /search-form", HandleSearchForm)
 
 	// Start the server

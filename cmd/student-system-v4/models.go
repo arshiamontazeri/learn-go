@@ -29,3 +29,12 @@ type StudentAverageView struct {
 type StudentSearch struct {
 	M map[Student][]Grade
 }
+
+type StudentWithGrades struct {
+	Student
+	Grades []Grade
+}
+
+type TemplateData struct {
+	Students []StudentWithGrades
+}

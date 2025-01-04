@@ -4,7 +4,6 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
-	"strings"
 )
 
 // --------------------------------------------------------------------------------------------
@@ -143,29 +142,26 @@ func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 // -----------------------------------------------------------------------------
 func HandleSearch(w http.ResponseWriter, r *http.Request) {
 
-	name := r.FormValue("name")
+	name := r.URL.Query().Get("name")
+	matchedStudents := searchStudentsByName(name)
 
-	data := StudentSearch{}
-
-	for _, student := range students {
-		if strings.Contains(student.Name, name) {
-			data.M[student] = []Grade{}
-		}
+	var studentsWithGrades []StudentWithGrades
+	for _, student := range matchedStudents {
+		grades := getGradesByStudentID(student.ID)
+		studentsWithGrades = append(studentsWithGrades, StudentWithGrades{
+			Student: student,
+			Grades:  grades,
+		})
 	}
 
-	for _, grade := range grades {
-		for _, student := range students {
-			if grade.StudentID == student.ID {
-				data.M[student] = append(data.M[student], grade)
-			}
-		}
-	}
-
-	tmpl := template.Must(template.ParseFiles("templates/search.html"))
-	tmpl.Execute(w, data)
+	tmpl := template.Must(template.ParseFiles("templates/student_search.html"))
+	tmpl.Execute(w, TemplateData{Students: studentsWithGrades})
 
 }
 
 func HandleSearchForm(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.ParseFiles("templates/student_search.html"))
+	tmpl.Execute(w, nil)
 
 }
