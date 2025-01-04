@@ -27,6 +27,5 @@ type StudentAverageView struct {
 }
 
 type StudentSearch struct {
-	students []Student
-	grades   []Grade
+	M map[Student][]Grade
 }

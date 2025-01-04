@@ -142,37 +142,30 @@ func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 
 // -----------------------------------------------------------------------------
 func HandleSearch(w http.ResponseWriter, r *http.Request) {
-	name := r.FormValue("Name")
 
-	ok := false
+	name := r.FormValue("name")
+
+	data := StudentSearch{}
+
 	for _, student := range students {
 		if strings.Contains(student.Name, name) {
-			ok = true
-
+			data.M[student] = []Grade{}
 		}
 	}
-	studentId, err := strconv.Atoi(r.FormValue("studentId"))
-	if err != nil {
-		http.Error(w, "Invalid StudentId", http.StatusBadRequest)
-	}
-	s := 0
-	if ok {
-		s = studentId
-	}
-	for _, student := range students {
-		if student.ID == s {
-			for _, grade := range grades {
-				if student.ID == grade.StudentID {
 
-				}
+	for _, grade := range grades {
+		for _, student := range students {
+			if grade.StudentID == student.ID {
+				data.M[student] = append(data.M[student], grade)
 			}
 		}
 	}
 
-	if !ok {
-		return
-	}
-
 	tmpl := template.Must(template.ParseFiles("templates/search.html"))
-	tmpl.Execute(w, s)
+	tmpl.Execute(w, data)
+
+}
+
+func HandleSearchForm(w http.ResponseWriter, r *http.Request) {
+
 }
