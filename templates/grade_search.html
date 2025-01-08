@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grade Search</title>
+  </head>
+  <body>
+    <h1>Grade Search</h1>
+    <form action="/grade-search" method="GET">
+      <input type="text" name="LessonName" placeholder="Enter Lesson Name" />
+      <button type="submit">Search</button>
+    </form>
+
+    {{if .grades}}
+    <h2>Search Results</h2>
+    <ul>
+      {{range .grades}}
+      <li>
+        <strong>{{.LessonName}}</strong> (Score: {{.Score}})
+        <ul>
+          {{range .students}}
+          <li>{{.Name}}: {{.Age}}</li>
+          {{end}}
+        </ul>
+      </li>
+      {{end}}
+    </ul>
+    {{else}}
+    <p>No grades found.</p>
+    {{end}}
+  </body>
+</html>

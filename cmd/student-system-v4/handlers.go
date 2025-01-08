@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"html/template"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -61,7 +63,14 @@ func HandleAddStudent(w http.ResponseWriter, r *http.Request) {
 		Age:  age,
 	}
 	students = append(students, newStudent)
-
+	StudentBytes, err := json.Marshal(students)
+	if err != nil {
+		panic(err)
+	}
+	err = os.WriteFile("./cmd/student-system-v4/students.json", StudentBytes, 0644)
+	if err != nil {
+		panic(err)
+	}
 	// Redirect back to the grades page
 	http.Redirect(w, r, "/grades", http.StatusSeeOther)
 }
@@ -94,7 +103,14 @@ func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
 		StudentID:  studentId,
 	}
 	grades = append(grades, newGrade)
-
+	GradeBytes, err := json.Marshal(grades)
+	if err != nil {
+		panic(err)
+	}
+	err = os.WriteFile("./cmd/student-system-v4/grades.json", GradeBytes, 0644)
+	if err != nil {
+		panic(err)
+	}
 	http.Redirect(w, r, "/students", http.StatusSeeOther)
 }
 
@@ -164,4 +180,31 @@ func HandleSearchForm(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/student_search.html"))
 	tmpl.Execute(w, nil)
 
+}
+
+// ----------------------------------------------------------------------------------
+func HandlesearchLessonName(w http.ResponseWriter, r *http.Request) {
+
+	LessonName := r.URL.Query().Get("LessonName")
+	matchedGrades := searchGradesByLesson(LessonName)
+	var gradesWithStudents []GradeWithStudents
+	for _, grade := range matchedGrades {
+		Students := getGradesByStudentId(grade.StudentID)
+		gradesWithStudents = append(gradesWithStudents, GradeWithStudents{
+			students: Students,
+			grade:    grade,
+		})
+	}
+	tmpl := template.Must(template.ParseFiles("templates/grade_search.html"))
+	err := tmpl.Execute(w, GradeTemplateDate{grades: gradesWithStudents})
+	if err != nil {
+		http.Error(w, "Error rendering template", http.StatusInternalServerError)
+	}
+}
+func HandlesearchLessonNameForm(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/grade_search.html"))
+	err := tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, "Error rendering template form", http.StatusInternalServerError)
+	}
 }

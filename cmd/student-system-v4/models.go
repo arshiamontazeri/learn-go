@@ -38,3 +38,13 @@ type StudentWithGrades struct {
 type TemplateData struct {
 	Students []StudentWithGrades
 }
+type GradesSearch struct {
+	G map[Grade][]Student
+}
+type GradeWithStudents struct {
+	grade    Grade
+	students []Student
+}
+type GradeTemplateDate struct {
+	grades []GradeWithStudents
+}
