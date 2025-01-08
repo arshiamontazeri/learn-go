@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"net/http"
 	"os"
@@ -191,13 +192,14 @@ func HandlesearchLessonName(w http.ResponseWriter, r *http.Request) {
 	for _, grade := range matchedGrades {
 		Students := getGradesByStudentId(grade.StudentID)
 		gradesWithStudents = append(gradesWithStudents, GradeWithStudents{
-			students: Students,
-			grade:    grade,
+			Students: Students,
+			Grade:    grade,
 		})
 	}
 	tmpl := template.Must(template.ParseFiles("templates/grade_search.html"))
-	err := tmpl.Execute(w, GradeTemplateDate{grades: gradesWithStudents})
+	err := tmpl.Execute(w, GradeTemplateDate{Grades: gradesWithStudents})
 	if err != nil {
+		fmt.Println(err)
 		http.Error(w, "Error rendering template", http.StatusInternalServerError)
 	}
 }

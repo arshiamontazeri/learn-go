@@ -86,6 +86,6 @@ func main() {
 	r.HandleFunc("GET /grade-search", HandlesearchLessonName)
 	r.HandleFunc("GET /grade-search-form", HandlesearchLessonNameForm)
 	// Start the server
-	log.Println("Server started on http://127.0.0.1:8080")
-	log.Println(http.ListenAndServe(":8080", r))
+	log.Println("Server started on http://127.0.0.1:3000")
+	log.Println(http.ListenAndServe(":3000", r))
 }

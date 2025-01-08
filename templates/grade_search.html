@@ -10,14 +10,14 @@
       <button type="submit">Search</button>
     </form>
 
-    {{if .grades}}
+    {{if .Grades}}
     <h2>Search Results</h2>
     <ul>
-      {{range .grades}}
+      {{range .Grades}}
       <li>
-        <strong>{{.LessonName}}</strong> (Score: {{.Score}})
+        <strong>{{.Grade.LessonName}}</strong> (Score: {{.Grade.Score}})
         <ul>
-          {{range .students}}
+          {{range .Students}}
           <li>{{.Name}}: {{.Age}}</li>
           {{end}}
         </ul>

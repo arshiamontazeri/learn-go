@@ -42,9 +42,9 @@ type GradesSearch struct {
 	G map[Grade][]Student
 }
 type GradeWithStudents struct {
-	grade    Grade
-	students []Student
+	Grade    Grade
+	Students []Student
 }
 type GradeTemplateDate struct {
-	grades []GradeWithStudents
+	Grades []GradeWithStudents
 }
