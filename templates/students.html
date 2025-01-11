@@ -2,25 +2,92 @@
 <html>
   <head>
     <title>Students</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      table {
+        width: 110%;
+        max-width: 800px;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover {
+        background-color: #ddd;
+      }
+
+      td {
+        color: #555;
+      }
+
+      a {
+        color: #4caf50;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .navigation {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+    </style>
   </head>
   <body>
-    <h1>All Students</h1>
-    <table border="1">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-      </tr>
-      {{range .}}
-      <tr>
-        <td>{{.ID}}</td>
-        <td>{{.Name}}</td>
-        <td>{{.Age}}</td>
-      </tr>
-      {{end}}
-    </table>
-    <br />
-    <a href="/grades">Back to Grades</a> |
-    <a href="/add-student-form">Add Student</a>
+    <div>
+      <h1>All Students</h1>
+      <table border="1">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+        </tr>
+        {{range .}}
+        <tr>
+          <td>{{.ID}}</td>
+          <td>{{.Name}}</td>
+          <td>{{.Age}}</td>
+        </tr>
+        {{end}}
+      </table>
+      <br />
+      <a href="/grades">Back to Grades</a> |
+      <a href="/add-student-form">Add Student</a>
+    </div>
   </body>
 </html>

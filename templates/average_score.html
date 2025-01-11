@@ -1,6 +1,61 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Average Score</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      table {
+        width: 120%;
+        max-width: 200px;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover {
+        background-color: #ddd;
+      }
+
+      td {
+        color: #555;
+      }
+    </style>
+  </head>
   <body>
+    <div>
     <h2>Average score</h2>
     <h2>{{.StudentName}}</h2>
     <h2>{{.Average}}</h2>
@@ -15,5 +70,6 @@
         <td>{{.Score}}</td>
       </tr>
       {{end}}
+    </div>
   </body>
 </html>

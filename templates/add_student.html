@@ -2,9 +2,75 @@
 <html>
   <head>
     <title>Add Student</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        padding: 55px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        width: 107%;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        background-color: black;
+      }
+    </style>
   </head>
   <body>
-    <h1>Add a New Student</h1>
+    <div>
+    <h1> Add a New Student</h1>
     <form action="/add-student" method="POST">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required /><br /><br />
@@ -13,6 +79,7 @@
       <input type="number" id="age" name="age" required /><br /><br />
 
       <button type="submit">Add Student</button>
+    </div>
     </form>
   </body>
 </html>

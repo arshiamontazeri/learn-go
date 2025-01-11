@@ -2,30 +2,97 @@
 <html>
   <head>
     <title>Add Grade</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 10;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      form {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 40px;
+        padding: 60px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        width: 107%;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        background-color: black; /* Change to a darker shade when pressed */
+      }
+    </style>
   </head>
   <body>
-    <h1>Add a New Grade</h1>
-    <form action="/add-grade" method="POST">
-      <label for="LessonName">LessonName:</label>
-      <input
-        type="text"
-        id="LessonName"
-        name="LessonName"
-        required
-      /><br /><br />
+    <div>
+      <h1>Add a New Grade</h1>
 
-      <label for="Score">Score:</label>
-      <input type="number" id="Score" name="Score" required /><br /><br />
+      <form action="/add-grade" method="POST">
+        <label for="LessonName">LessonName:</label>
+        <input
+          type="text"
+          id="LessonName"
+          name="LessonName"
+          required
+        /><br /><br />
 
-      <label for="StudentId">StudentId:</label>
-      <input
-        type="number"
-        id="StudentId"
-        name="StudentId"
-        required
-      /><br /><br />
+        <label for="Score">Score:</label>
+        <input type="number" id="Score" name="Score" required /><br /><br />
 
-      <button type="submit">Add Grade</button>
-    </form>
+        <label for="StudentId">StudentId:</label>
+        <input
+          type="number"
+          id="StudentId"
+          name="StudentId"
+          required
+        /><br /><br />
+
+        <button type="submit">Add Grade</button>
+      </form>
+    </div>
   </body>
 </html>
