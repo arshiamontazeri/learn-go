@@ -15,7 +15,8 @@
     <ul>
       {{range .Grades}}
       <li>
-        <strong>{{.Grade.LessonName}}</strong> (Score: {{.Grade.Score}})
+        <strong>(LessonName :{{.Grade.LessonName}})</strong> (Score:
+        {{.Grade.Score}})
         <ul>
           {{range .Students}}
           <li>{{.Name}}: {{.Age}}</li>
