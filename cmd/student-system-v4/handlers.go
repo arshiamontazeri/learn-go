@@ -118,7 +118,12 @@ func HandleAddGrade(w http.ResponseWriter, r *http.Request) {
 // --------------------------------------------------------------------------------------------
 func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 
-	id, _ := strconv.Atoi(r.PathValue("id"))
+	id, err := strconv.Atoi(r.FormValue("id"))
+
+	if err != nil {
+		http.Error(w, "Invalid Score", http.StatusBadRequest)
+		return
+	}
 
 	res := StudentAverageView{}
 
@@ -136,7 +141,7 @@ func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// // average
+	// average
 	totalScore := 0.0
 	count := 0
 	for _, grade := range res.Grades {
@@ -151,9 +156,18 @@ func HandleSeeStudentAverageScore(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res.Average = totalScore
-
 	tmpl := template.Must(template.ParseFiles("templates/average_score.html"))
-	tmpl.Execute(w, res)
+	err = tmpl.Execute(w, res)
+	if err != nil {
+		http.Error(w, "<****>error1<****>", http.StatusBadRequest)
+	}
+}
+func HandleAverageform(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/average_score.html"))
+	err := tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, "<****>error2<****>", http.StatusBadRequest)
+	}
 }
 
 // -----------------------------------------------------------------------------
@@ -209,4 +223,10 @@ func HandlesearchLessonNameForm(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Error rendering template form", http.StatusInternalServerError)
 	}
+}
+
+// ----------------------------------------------------------------------------------------------------
+func HandelGetHome(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/home.html"))
+	tmpl.Execute(w, nil)
 }

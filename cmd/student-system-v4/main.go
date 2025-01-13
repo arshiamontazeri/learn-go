@@ -76,7 +76,8 @@ func main() {
 	r.HandleFunc("GET /add-grade-form", HandleAddGradeForm)
 
 	//Form for student's overall grade point average
-	r.HandleFunc("GET /students/{id}/average", HandleSeeStudentAverageScore)
+	r.HandleFunc("GET /students-average-form", HandleAverageform)
+	r.HandleFunc("POST /students-average", HandleSeeStudentAverageScore)
 
 	//Student search
 	r.HandleFunc("GET /search", HandleSearch)
@@ -85,6 +86,10 @@ func main() {
 	// Grade search
 	r.HandleFunc("GET /grade-search", HandlesearchLessonName)
 	r.HandleFunc("GET /grade-search-form", HandlesearchLessonNameForm)
+
+	// select
+	r.HandleFunc("GET /", HandelGetHome)
+
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:3000")
 	log.Println(http.ListenAndServe(":3000", r))

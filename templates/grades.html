@@ -51,6 +51,25 @@
       td {
         color: #555;
       }
+
+      a {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        background-color: #4caf50;
+        text-decoration: underline;
+      }
+      a:active {
+        background-color: blue;
+        text-decoration: underline;
+      }
+      .navigation {
+        margin-top: 20px;
+        font-size: 16px;
+      }
     </style>
   </head>
   <body>
@@ -72,6 +91,7 @@
         </tr>
         {{end}}
       </table>
+      <a href="/">Back to home</a> |
     </div>
   </body>
 </html>
