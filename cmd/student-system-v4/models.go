@@ -14,6 +14,7 @@ type Grade struct {
 }
 
 type StudentGradeView struct {
+	ID          int
 	StudentName string
 	StudentAge  int
 	LessonName  string

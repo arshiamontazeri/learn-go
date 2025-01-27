@@ -17,6 +17,7 @@ func HandleGetAllGrades(w http.ResponseWriter, r *http.Request) {
 		for _, student := range students {
 			if grade.StudentID == student.ID {
 				studentGradeViews = append(studentGradeViews, StudentGradeView{
+					ID:          grade.ID,
 					StudentName: student.Name,
 					StudentAge:  student.Age,
 					LessonName:  grade.LessonName,
