@@ -241,7 +241,6 @@ func HandUpdateForm(w http.ResponseWriter, r *http.Request) {
 func UpdateStudent(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	age, err := strconv.Atoi(r.FormValue("age"))
-	fmt.Print(err)
 	if err != nil {
 		http.Error(w, "Invalid age", http.StatusBadRequest)
 		return
@@ -254,7 +253,6 @@ func UpdateStudent(w http.ResponseWriter, r *http.Request) {
 	updated := false
 	for i, student := range students {
 		if student.ID == id {
-			// Update student details
 			students[i].Name = name
 			students[i].Age = age
 			updated = true
@@ -279,4 +277,58 @@ func UpdateStudent(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
+}
+
+// ---------------------------------------------------------------------------------------
+func HandUpdateGradeForm(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/update_grade.html"))
+	tmpl.Execute(w, nil)
+}
+
+// ---------------------------------------------------------------------------------------
+func UpdateGrade(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.FormValue("id"))
+	if err != nil {
+		http.Error(w, "Invalid age", http.StatusBadRequest)
+		return
+	}
+	score, err := strconv.Atoi(r.FormValue("score"))
+	if err != nil {
+		http.Error(w, "Invalid age", http.StatusBadRequest)
+		return
+	}
+	lessonName := r.FormValue("lessonName")
+	studentId, err := strconv.Atoi(r.FormValue("studentId"))
+	if err != nil {
+		http.Error(w, "Invalid age", http.StatusBadRequest)
+		return
+	}
+	update := false
+	for i, grade := range grades {
+		if grade.ID == id {
+			grades[i].ID = id
+			grades[i].LessonName = lessonName
+			grades[i].Score = float64(score)
+			grades[i].StudentID = studentId
+			update = true
+			break
+		}
+	}
+	if !update {
+		http.Error(w, "Student not found", http.StatusNotFound)
+		return
+	}
+	studentBytes, err := json.MarshalIndent(grades, "", "  ")
+	if err != nil {
+		http.Error(w, "Failed to serialize students", http.StatusInternalServerError)
+		return
+	}
+
+	err = os.WriteFile("./cmd/student-system-v4/students.json", studentBytes, 0644)
+	if err != nil {
+		http.Error(w, "Failed to save students data", http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

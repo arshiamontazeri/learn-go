@@ -94,6 +94,10 @@ func main() {
 	r.HandleFunc("GET /update-student-form", HandUpdateForm)
 	r.HandleFunc("POST /update-student", UpdateStudent)
 
+	// updategrade
+	r.HandleFunc("GET /update-grade-form", HandUpdateGradeForm)
+	r.HandleFunc("POST /update-grade", UpdateGrade)
+
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:3000")
 	log.Println(http.ListenAndServe(":3000", r))
