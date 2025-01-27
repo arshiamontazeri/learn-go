@@ -90,6 +90,10 @@ func main() {
 	// select
 	r.HandleFunc("GET /", HandelGetHome)
 
+	// updatestudent
+	r.HandleFunc("GET /update-student-form", HandUpdateForm)
+	r.HandleFunc("POST /update-student", UpdateStudent)
+
 	// Start the server
 	log.Println("Server started on http://127.0.0.1:3000")
 	log.Println(http.ListenAndServe(":3000", r))

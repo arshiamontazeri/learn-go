@@ -197,7 +197,7 @@ func HandleSearchForm(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// ----------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 func HandlesearchLessonName(w http.ResponseWriter, r *http.Request) {
 
 	LessonName := r.URL.Query().Get("LessonName")
@@ -229,4 +229,52 @@ func HandlesearchLessonNameForm(w http.ResponseWriter, r *http.Request) {
 func HandelGetHome(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/home.html"))
 	tmpl.Execute(w, nil)
+}
+
+// ----------------------------------------------------------------------------------------------------
+func HandUpdateForm(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/update-student.html"))
+	tmpl.Execute(w, nil)
+}
+
+// ----------------------------------------------------------------------------------------
+func UpdateStudent(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("name")
+	age, err := strconv.Atoi(r.FormValue("age"))
+	fmt.Print(err)
+	if err != nil {
+		http.Error(w, "Invalid age", http.StatusBadRequest)
+		return
+	}
+	id, err := strconv.Atoi(r.FormValue("id"))
+	if err != nil {
+		http.Error(w, "Invalid id", http.StatusBadRequest)
+		return
+	}
+	updated := false
+	for i, student := range students {
+		if student.ID == id {
+			// Update student details
+			students[i].Name = name
+			students[i].Age = age
+			updated = true
+			break
+		}
+	}
+	if !updated {
+		http.Error(w, "Student not found", http.StatusNotFound)
+		return
+	}
+	studentBytes, err := json.MarshalIndent(students, "", "  ")
+	if err != nil {
+		http.Error(w, "Failed to serialize students", http.StatusInternalServerError)
+		return
+	}
+
+	err = os.WriteFile("./cmd/student-system-v4/students.json", studentBytes, 0644)
+	if err != nil {
+		http.Error(w, "Failed to save students data", http.StatusInternalServerError)
+		return
+	}
+
 }
