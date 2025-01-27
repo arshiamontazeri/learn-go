@@ -233,7 +233,7 @@ func HandelGetHome(w http.ResponseWriter, r *http.Request) {
 
 // ----------------------------------------------------------------------------------------------------
 func HandUpdateForm(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("templates/update-student.html"))
+	tmpl := template.Must(template.ParseFiles("templates/update_student.html"))
 	tmpl.Execute(w, nil)
 }
 
@@ -276,5 +276,7 @@ func UpdateStudent(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to save students data", http.StatusInternalServerError)
 		return
 	}
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
