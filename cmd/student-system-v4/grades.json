@@ -1,1 +1,68 @@
-[{"ID":1,"StudentID":3,"LessonName":"math ","Score":99},{"ID":2,"StudentID":2,"LessonName":"math ","Score":96},{"ID":3,"StudentID":3,"LessonName":"math ","Score":90},{"ID":4,"StudentID":1,"LessonName":"Chemistry","Score":100},{"ID":5,"StudentID":1,"LessonName":"Chemistry","Score":100},{"ID":6,"StudentID":1,"LessonName":"Chemistry","Score":100},{"ID":7,"StudentID":1,"LessonName":"history","Score":100},{"ID":8,"StudentID":4,"LessonName":"history","Score":100},{"ID":9,"StudentID":6,"LessonName":"history","Score":100},{"ID":10,"StudentID":7,"LessonName":"history","Score":100},{"ID":11,"StudentID":1,"LessonName":"math","Score":34}]
+[
+  {
+    "ID": 1,
+    "StudentID": 2,
+    "LessonName": "math",
+    "Score": 111
+  },
+  {
+    "ID": 2,
+    "StudentID": 2,
+    "LessonName": "math ",
+    "Score": 96
+  },
+  {
+    "ID": 3,
+    "StudentID": 3,
+    "LessonName": "math ",
+    "Score": 90
+  },
+  {
+    "ID": 4,
+    "StudentID": 1,
+    "LessonName": "Chemistry",
+    "Score": 100
+  },
+  {
+    "ID": 5,
+    "StudentID": 1,
+    "LessonName": "Chemistry",
+    "Score": 100
+  },
+  {
+    "ID": 6,
+    "StudentID": 1,
+    "LessonName": "Chemistry",
+    "Score": 100
+  },
+  {
+    "ID": 7,
+    "StudentID": 1,
+    "LessonName": "history",
+    "Score": 100
+  },
+  {
+    "ID": 8,
+    "StudentID": 4,
+    "LessonName": "history",
+    "Score": 100
+  },
+  {
+    "ID": 9,
+    "StudentID": 6,
+    "LessonName": "history",
+    "Score": 100
+  },
+  {
+    "ID": 10,
+    "StudentID": 7,
+    "LessonName": "history",
+    "Score": 100
+  },
+  {
+    "ID": 11,
+    "StudentID": 1,
+    "LessonName": "math",
+    "Score": 34
+  }
+]

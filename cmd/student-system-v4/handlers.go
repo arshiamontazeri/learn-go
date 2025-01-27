@@ -318,13 +318,13 @@ func UpdateGrade(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Student not found", http.StatusNotFound)
 		return
 	}
-	studentBytes, err := json.MarshalIndent(grades, "", "  ")
+	gradeBytes, err := json.MarshalIndent(grades, "", "  ")
 	if err != nil {
 		http.Error(w, "Failed to serialize students", http.StatusInternalServerError)
 		return
 	}
 
-	err = os.WriteFile("./cmd/student-system-v4/students.json", studentBytes, 0644)
+	err = os.WriteFile("./cmd/student-system-v4/grades.json", gradeBytes, 0644)
 	if err != nil {
 		http.Error(w, "Failed to save students data", http.StatusInternalServerError)
 		return
